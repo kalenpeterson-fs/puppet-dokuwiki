@@ -1,0 +1,16 @@
+{
+  "name": "kpeterson-dokuwiki",
+  "version": "0.1.0",
+  "author": "kpeterson",
+  "summary": "Install and Configure DokuWiki",
+  "license": "Apache-2.0",
+  "source": "GitHub",
+  "project_page": null,
+  "issues_url": null,
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+    {"name":"puppetlabs-apache","version_requirement":">= 1.10.0"}
+  ],
+  "data_provider": null
+}
+
