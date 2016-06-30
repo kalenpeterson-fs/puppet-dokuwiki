@@ -43,6 +43,6 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class dokuwiki inherits dokuwiki::params {
-
-  class { '::dokuwiki::install': }
+  class { '::dokuwiki::install': } ->
+  class { '::dokuwiki::config': }
 }

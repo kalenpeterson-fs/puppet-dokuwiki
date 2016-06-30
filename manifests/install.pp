@@ -34,7 +34,7 @@ class dokuwiki::install {
     ensure  => directory,
     owner   => $doku_user,
     group   => $doku_user,
-    mode    => '0750',
+    mode    => '0755',
     require => User[$doku_user],
   }
 
@@ -47,12 +47,13 @@ class dokuwiki::install {
     before   => Exec['extract_dokuwiki'],
   }
 
-  # Install the the DokuWiki Package
+  # Install the the DokuWiki Package and set permissions
   exec { 'extract_dokuwiki':
     command     => "/usr/bin/tar -xzf ${doku_install} -C ${$web_root} --strip-components=1",
     subscribe   => File[$doku_install],
     refreshonly => true,
   }
+  
 
   # Initialize the data, conf, and bin dirs on install
   # then remove the source
@@ -66,11 +67,6 @@ class dokuwiki::install {
       replace => false,
       source  => "file:${web_root}/${dir}",
       require => Exec['extract_dokuwiki'],
-      before  => File["${web_root}/${dir}"],
-    }
-    file { "${web_root}/${dir}":
-      ensure  => absent,
-      force   => true,
     }
   }
 
@@ -83,6 +79,5 @@ class dokuwiki::install {
       require => Exec['extract_dokuwiki'],
     }
   }
-
 
 }
