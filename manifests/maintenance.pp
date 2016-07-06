@@ -1,5 +1,5 @@
 class dokuwiki::maintenance (
-  $dat_root             = $::dokuwiki::params::dat_root,
+  $farmer_dir             = $::dokuwiki::params::farmer_dir,
   $user                 = $::dokuwiki::params::user,
   $group                = $::dokuwiki::params::group,
   $clean_enable         = $::dokuwiki::params::clean_enable,
@@ -7,7 +7,7 @@ class dokuwiki::maintenance (
 ) {
 
   # Setup the directory to hold maintenance scripts
-  $script_dir = "${dat_root}/scripts"
+  $script_dir = "${farmer_dir}/scripts"
   file { $script_dir:
     ensure => directory,
     owner  => $user,
@@ -23,7 +23,7 @@ class dokuwiki::maintenance (
       group   => $group,
       mode    => '0754',
       content => epp('dokuwiki/cleanup.sh.epp', {
-        'dat_root'             => $dat_root,
+        'farmer_dir'             => $farmer_dir,
         'clean_retention_days' => $clean_retention_days
       }),
     }

@@ -44,7 +44,7 @@
 #
 class dokuwiki (
   $web_root             = $::dokuwiki::params::web_root,
-  $dat_root             = $::dokuwiki::params::dat_root,
+  $farmer_dir             = $::dokuwiki::params::farmer_dir,
   $user                 = $::dokuwiki::params::user,
   $group                = $::dokuwiki::params::group,
   $doku_source          = $::dokuwiki::params::doku_source,
@@ -62,16 +62,16 @@ class dokuwiki (
   $clean_retention_days = $::dokuwiki::params::clean_retention_days,
 ) inherits dokuwiki::params {
   class { '::dokuwiki::install': 
-    web_root          => $web_root,
-    dat_root          => $dat_root,
-    doku_source       => $doku_source,
-    user              => $user,
-    group             => $group,
-    doku_install      => $doku_install,
+    web_root     => $web_root,
+    farmer_dir   => $farmer_dir,
+    doku_source  => $doku_source,
+    user         => $user,
+    group        => $group,
+    doku_install => $doku_install,
   } ->
   class { '::dokuwiki::config': 
     web_root            => $web_root,
-    dat_root            => $dat_root,
+    farmer_dir          => $farmer_dir,
     user                => $user,
     group               => $group,
     conf_title          => $conf_title,
@@ -85,7 +85,7 @@ class dokuwiki (
     conf_acl            => $conf_acl,
   } ->
   class { '::dokuwiki::maintenance':
-    dat_root             => $dat_root,
+    farmer_dir           => $farmer_dir,
     user                 => $user,
     group                => $group,
     clean_enable         => $clean_enable,

@@ -1,11 +1,12 @@
 class dokuwiki::params {
  
   $web_root             = "/srv/www/vhost/dokuwiki"
-  $dat_root             = "/var/dokuwiki"
+  $farmer_dir           = "${web_root}/dokuwiki"
   $user                 = 'dokuwiki'
   $group                = 'dokuwiki'
   $doku_source          = "http://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz"
-  $doku_install         = "${dat_root}/dokuwiki.tar.gz"
+  $doku_install         = "${web_root}/dokuwiki.tar.gz"
+  $animal_template      = "/opt/puppetlabs/puppet/modules/dokuwiki/files/animal"
 
   $conf_lang            = 'en'
   $conf_license         = '0'
@@ -52,7 +53,7 @@ class dokuwiki::params {
 
   case $::osfamily {
     'RedHat': {
-      $required_packages = [ 'php' ]
+      $required_packages = [ 'php', 'tar', 'unzip' ]
     }
     Default: {
       fail("Module kpeterson-dokuwiki doesn't support ${::osfamily}")

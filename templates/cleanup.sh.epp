@@ -1,5 +1,5 @@
 <%- |
-      String $dat_root,
+      String $farmer_dir,
       String $clean_retention_days
 | -%>
 #!/bin/bash
@@ -30,4 +30,4 @@ function cleanup()
 }
  
 # cleanup DokuWiki installations (path to datadir, number of days)
-cleanup <%= "${dat_root}/data" %> <%= $clean_retention_days %>
+cleanup <%= "${farmer_dir}/data" %> <%= $clean_retention_days %>

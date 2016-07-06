@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# Prevent rewrite loops by making sure that the farmer directory won't be matched
+# If you need to enable access to other directories either add them here or try something like
+# RewriteCond %{REQUEST_FILENAME}       !-f
+# RewriteCond %{REQUEST_FILENAME}       !-d
+# but then also the files of your animals (if they should be in this directory) will be accessible
+# so make sure you have properly protected them
+
+RewriteCond %{REQUEST_URI} !^/?dokuwiki/
+RewriteRule ^/?([^/]+)/(.*)  /dokuwiki/$2?animal=$1 [QSA]
+RewriteCond %{REQUEST_URI} !^/?dokuwiki$
+# RewriteCond %{REQUEST_FILENAME}       !-f # allow files in the root directory (like some index file)
+RewriteRule ^/?([^/]+)$      /dokuwiki/?animal=$1 [QSA]
+Options +FollowSymLinks

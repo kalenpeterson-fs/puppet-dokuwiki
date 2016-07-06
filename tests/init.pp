@@ -11,6 +11,23 @@
 #
 
 class { '::dokuwiki':
-  conf_title   => 'My Wiki',
+  conf_title   => 'Farmer Wiki',
   clean_enable => false,
+}
+
+::dokuwiki::animal { 'pig': }
+::dokuwiki::animal { 'dog': }
+::dokuwiki::animal { 'cat':
+  conf_users => [
+    {
+      login        => 'kalen',
+      passwordhash => '$1$TLe1AqBY$FMt74HsbIz6HWJ.9I7Mh20',
+      realname     => 'Kalen Peterson',
+      email        => 'kpeterson@.net',
+      groups       => [ 'admin', 'user' ],
+    }
+  ],
+}
+::dokuwiki::animal { 'cow': 
+  conf_useacl => '0',
 }
